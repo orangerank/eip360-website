@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BookButton } from "@/components/BookButton";
+import { HeroDemo } from "@/components/HeroDemo";
 import { TurnTaxTeaser } from "@/components/TurnTaxTeaser";
 import {
   attribution,
@@ -31,14 +32,14 @@ export default function HomePage() {
   return (
     <>
       <section className="bg-bg text-paper">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:px-6 lg:py-24">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:px-6 lg:py-20">
           <div>
             <p className="display text-[0.75rem] tracking-[0.16em] text-gold-bright uppercase">
-              Workforce retention advisory for companies with large frontline workforces
+              For HR, people, and operations leaders
             </p>
-            <h1 className="mt-5 text-[clamp(2.3rem,5vw,4.4rem)]">{homepageHeadline}</h1>
-            <p className="mt-5 max-w-xl text-[1.15rem] text-paper/80">
-              EIP finds who is likely to leave in the next 90 days, prices what turnover is costing you, and stays until the number moves. Built for HR, people, and operations leaders.
+            <h1 className="mt-5 text-[clamp(2.3rem,4.6vw,4.2rem)]">{homepageHeadline}</h1>
+            <p className="mt-5 max-w-xl text-[1.08rem] text-paper/80">
+              For US companies with large frontline workforces in power utility, healthcare, warehouse and logistics, contact centers, and manufacturing. EIP finds who is likely to leave in the next 90 days, prices the cost, and stays until the number moves.
             </p>
             <ul className="mt-6 space-y-1 text-paper/70">
               {supportingQuestions.map((question) => (
@@ -53,19 +54,7 @@ export default function HomePage() {
             </div>
             <p className="mt-5 max-w-lg text-[0.98rem] text-paper/70">{heroMicro}</p>
           </div>
-          <figure>
-            <Image
-              src="/assets/video/warehouse-2-poster.jpg"
-              alt="A frontline warehouse workplace"
-              width={1200}
-              height={800}
-              priority
-              className="h-auto w-full object-cover"
-            />
-            <figcaption className="mt-3 text-[0.85rem] text-paper/55">
-              Frontline work is where turnover costs the most. Photo from EIP&apos;s published library. A newer hero photo is an open item for Brett.
-            </figcaption>
-          </figure>
+          <HeroDemo />
         </div>
       </section>
 

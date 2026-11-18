@@ -88,9 +88,9 @@ export const heroMicro =
   "Starts with a 20-minute call. No contract. No cost. If it doesn't surprise you, walk away.";
 
 export const supportingQuestions = [
-  "Losing people and don't know why?",
-  "Turnover is costing you and there's no plan?",
-  "Losing the people you can't replace?",
+  "High-volume turnover, and the cost never shows up in one place?",
+  "Losing the clinicians, operators, and lineworkers you cannot replace?",
+  "Roles with no backfill, and another seat about to empty?",
 ] as const;
 
 export type NavItem = {

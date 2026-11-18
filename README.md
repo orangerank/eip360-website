@@ -83,7 +83,7 @@ All of these live in `content/site.ts` unless noted.
 2. Draft copy from the spec is in the pages (problem section, founder bio, offer, confirmation, calculator result, checkup result, prepare). Approve or edit in place.
 3. Headshots are the images already published on eip360.com. A few are low resolution. Replace files in `public/assets/council-sm/`.
 4. Brett's personal LinkedIn URL is null. The team page says the link is pending. Company LinkedIn is set.
-5. Hero photo is a workplace image already published on eip360.com. Confirm EIP has rights, or replace `public/assets/video/warehouse-2-poster.jpg`.
+5. The homepage hero is a sample product panel (Flight Risk Score, Turn Tax, Retention Dashboard) with fictional roles and sites, labeled Sample data. A separate hero photograph is not used.
 6. Calendly host copy names Tony Fox and a 20-minute call. Confirm host, length, and event name, then set the redirect and confirmation email in Calendly.
 7. Demo password: set `DEMO_PASSWORD` on the host. Do not put it in git or on `/thanks`.
 8. Homepage Turn Tax example inputs are Frontline, $48,000, 120 departures, labeled Example. Replace `turnTaxExample` in `content/site.ts`.
