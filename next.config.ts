@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
 const nextConfig: NextConfig = {
+  images: {
+    // Serve files from /public as-is. Cloudflare Image Resizing is not required.
+    unoptimized: true,
+  },
   async redirects() {
     return [
       { source: "/advantage", destination: "/approach", statusCode: 301 },
@@ -20,3 +25,7 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+if (process.env.NODE_ENV === "development") {
+  void initOpenNextCloudflareForDev();
+}

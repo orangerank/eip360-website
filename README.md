@@ -6,11 +6,11 @@ Positioning: Advisory first. Technology backed.
 
 ## Stack
 
-- Next.js (App Router) and React
+- Next.js (App Router) and React, adapted for Cloudflare Workers with `@opennextjs/cloudflare`
 - Tailwind CSS 4
 - TypeScript
-- Static pages, with two small server actions for the demo password and the Snapshot invitation code
-- Ready for Vercel. No database.
+- Mostly static pages, with two server actions for the demo password and the Snapshot invitation code
+- No database. No R2 bucket. Images are served as files, so Cloudflare Image Resizing is not required.
 
 ## Run locally
 
@@ -24,23 +24,69 @@ Open http://localhost:3000.
 ```bash
 npm test
 npm run check:language
-npm run build
+npm run cf:build
 ```
+
+`npm run build` is only the Next.js compile. Cloudflare deploys use `npm run cf:build`, which runs that compile and then the OpenNext adapter.
 
 `npm test` checks the Turn Tax math and the 24-question Retention Checkup scoring. `npm run check:language` fails if banned phrases show up in source, JSON, or `llms.txt`.
 
-## Deploy
+Local Workers runtime (after a build):
 
-Connect the repo to Vercel and deploy the `main` branch of this project (or the review branch) as its own project. Do not point the production domain at this build until Brett signs off.
+```bash
+cp .dev.vars.example .dev.vars
+# put throwaway values in .dev.vars, then:
+npx opennextjs-cloudflare preview
+```
 
-Optional environment variables:
+That serves the built worker on http://localhost:8787. `.dev.vars` is gitignored.
 
-| Name | Purpose |
+## Deploy on Cloudflare
+
+Create a **new Worker** in the same Cloudflare account that already hosts eip360.com. Do not attach the `eip360.com` route to this Worker until Brett signs off. The live site stays on its current Worker.
+
+Dashboard path: Workers & Pages → Create → Import a repository → GitHub → `orangerank/eip360-website`.
+
+Do not accept an automatic Next.js preset. That path uses a different adapter. This repo already has `wrangler.jsonc` for the OpenNext adapter. If the setup screen offers a framework preset, choose none / custom and enter the commands below. You can also set them later under the Worker → Settings → Build.
+
+| Setting | Value |
 | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Canonical origin. Defaults to `https://eip360.com`. Set this to the review URL until launch. |
-| `NEXT_PUBLIC_INDEXABLE` | Set to `true` only at launch. Until then robots disallow the whole site so this build does not compete with the live site. |
-| `DEMO_PASSWORD` | Password for `/demo`. Shared with a visitor after they book. Never commit it. |
-| `FREE_POC_CODE` | Invitation code for `/free-poc`. Never commit it. |
+| Production branch | `main` |
+| Root directory | repository root (leave blank) |
+| Build command | `npm run cf:build` |
+| Deploy command | `npx wrangler deploy --keep-vars` |
+| Preview command | `npx wrangler preview` |
+| Node.js | 22. Set the build variable `NODE_VERSION` to `22`. `package.json` also sets `"engines": { "node": "22" }`. |
+| Non-production branch builds | On, so pull requests get a preview URL |
+
+`--keep-vars` is required. A deploy without it deletes the runtime secrets you set in the dashboard.
+
+### Build variables
+
+Worker → Settings → Build → Build variables and secrets. These are available only while the site is compiling. `NEXT_PUBLIC_*` values are baked into the pages at build time.
+
+| Name | Preview builds | Production builds |
+| --- | --- | --- |
+| `NODE_VERSION` | `22` | `22` |
+| `NEXT_PUBLIC_SITE_URL` | the preview hostname, once Cloudflare shows it. Until then, leave unset. Canonicals fall back to `https://eip360.com`. | the public URL. Leave as `https://eip360.com` only when this Worker is the live site. |
+| `NEXT_PUBLIC_INDEXABLE` | leave unset | leave unset until launch, then `true` |
+
+While `NEXT_PUBLIC_INDEXABLE` is unset, `/robots.txt` disallows the whole site and pages send `noindex`. That is the preview default.
+
+### Runtime secrets
+
+Worker → Settings → Variables and Secrets. Add the same names for Production and for Preview. Type: **Secret** (encrypted). Do not put the values in git, in Build variables, or in `wrangler.jsonc`.
+
+| Name | Used by |
+| --- | --- |
+| `DEMO_PASSWORD` | `/demo` server action |
+| `FREE_POC_CODE` | `/free-poc` server action |
+
+The Worker reads them from `process.env` at request time. If a secret is missing, the form stays locked and says the value has not been configured.
+
+Preview secrets are configured with the preview, not by the production secret list. In the dashboard use the Preview environment (Settings → Variables and Secrets, or `npx wrangler preview secret put DEMO_PASSWORD`) so a preview URL can open the gates. The password still never appears in the repository or on `/thanks`.
+
+This Worker does not need a KV namespace, an R2 bucket, or an Images binding. The free Workers plan is enough.
 
 The contact form opens the visitor's email app to `hello@eip360.com`. An email provider is not connected. Calendly stays embedded on `/contact#book` (`https://calendly.com/useeip-45`). In Calendly, set the after-booking redirect to this site's `/thanks` when you are ready. The confirmation email, including the demo password, is sent by Calendly, not by this repo.
 
@@ -85,7 +131,7 @@ All of these live in `content/site.ts` unless noted.
 4. Brett's personal LinkedIn URL is null. The team page says the link is pending. Company LinkedIn is set.
 5. The homepage hero is a sample product panel (Flight Risk Score, Turn Tax, Retention Dashboard) with fictional roles and sites, labeled Sample data. A separate hero photograph is not used.
 6. Calendly host copy names Tony Fox and a 20-minute call. Confirm host, length, and event name, then set the redirect and confirmation email in Calendly.
-7. Demo password: set `DEMO_PASSWORD` on the host. Do not put it in git or on `/thanks`.
+7. Demo password: set the `DEMO_PASSWORD` Worker secret. Do not put it in git or on `/thanks`. The Snapshot code is the `FREE_POC_CODE` secret.
 8. Homepage Turn Tax example inputs are Frontline, $48,000, 120 departures, labeled Example. Replace `turnTaxExample` in `content/site.ts`.
 9. Facts page uses a Council headcount of 10, matching the current `/for-ai`. The team page lists 6 leaders and 6 Council members. Confirm the number.
 10. Platform logins and who publishes redirects are an operations item, not a code item. Redirects are in `next.config.ts`.
@@ -95,7 +141,7 @@ All of these live in `content/site.ts` unless noted.
 14. Analytics events are not installed. Add them when access is available: calculator completed, result call clicked, checkup completed, call button clicked, `/thanks` viewed.
 15. No email tool yet. The message form uses a mailto link. A PDF of the Turn Tax breakdown is not gated.
 
-The review banner at the top of every page is `siteMeta.reviewBanner` in `content/site.ts`. Turn it off at launch, and set `NEXT_PUBLIC_INDEXABLE=true`.
+The review banner at the top of every page is `siteMeta.reviewBanner` in `content/site.ts`. Turn it off at launch, and set the production build variable `NEXT_PUBLIC_INDEXABLE` to `true`.
 
 ## Language
 

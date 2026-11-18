@@ -1,9 +1,13 @@
 node_modules
 .next
 out
-.vercel
 *.log
 .env
 .env*.local
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+.open-next
+.wrangler
 .DS_Store
 tsconfig.tsbuildinfo

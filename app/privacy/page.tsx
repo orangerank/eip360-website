@@ -11,7 +11,7 @@ export default function PrivacyPage() {
       <div className="mt-8 space-y-5 text-ink/85">
         <p>Experience Improvement Partners LLC (&quot;EIP,&quot; &quot;we,&quot; &quot;us&quot;) is a Texas limited liability company. This policy explains how we handle information on this website and in our client work.</p>
         <h2 className="text-[1.4rem]">Information we collect on this website</h2>
-        <p>We do not run analytics, advertising pixels, or tracking cookies on this review build unless Brett turns analytics on later. The site may be hosted on Vercel or a similar host, which may process technical information such as your IP address and browser type to deliver the site. If you email us, we receive the information you choose to send.</p>
+        <p>We do not run analytics, advertising pixels, or tracking cookies on this review build unless Brett turns analytics on later. The site is hosted on Cloudflare, which may process technical information such as your IP address and browser type to deliver and protect the site. If you email us, we receive the information you choose to send.</p>
         <h2 className="text-[1.4rem]">Booking a call</h2>
         <p>When you book a call on our contact page, the calendar is provided by Calendly, a third-party scheduling service. Information you enter there is handled under Calendly&apos;s privacy policy.</p>
         <h2 className="text-[1.4rem]">The Retention Snapshot form</h2>
