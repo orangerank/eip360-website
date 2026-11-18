@@ -41,6 +41,16 @@ npx opennextjs-cloudflare preview
 
 That serves the built worker on http://localhost:8787. `.dev.vars` is gitignored.
 
+## Cloudflare preview
+
+Workers Builds is connected to this repo. Its production branch is `cursor/eip-website-rebuild-7097`, and the Worker name in `wrangler.jsonc` is `eip360-website`.
+
+- Build: `npm run cf:build`
+- Deploy: `npx wrangler deploy --keep-vars`
+- Build variable `NODE_VERSION` = `22`
+- `NEXT_PUBLIC_INDEXABLE` stays unset, so the preview is not indexed
+- `DEMO_PASSWORD` and `FREE_POC_CODE` are Cloudflare secrets, still pending from Brett
+
 ## Deploy on Cloudflare
 
 Create a **new Worker** in the same Cloudflare account that already hosts eip360.com. Do not attach the `eip360.com` route to this Worker until Brett signs off. The live site stays on its current Worker.
@@ -51,7 +61,7 @@ Do not accept an automatic Next.js preset. That path uses a different adapter. T
 
 | Setting | Value |
 | --- | --- |
-| Production branch | `main` |
+| Production branch | `cursor/eip-website-rebuild-7097` (the connected review branch; move this to `main` only at launch) |
 | Root directory | repository root (leave blank) |
 | Build command | `npm run cf:build` |
 | Deploy command | `npx wrangler deploy --keep-vars` |
