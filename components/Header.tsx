@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { primaryNav } from "@/content/site";
+import { primaryNav, proposedLogo } from "@/content/site";
 import { BookButton } from "./BookButton";
 
 export function Header() {
@@ -13,13 +12,14 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-paper/10 bg-bg/95 text-paper backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 lg:px-6">
         <Link href="/" className="shrink-0" aria-label="EIP home">
-          <Image
-            src="/assets/brand/eip-logo-640.webp"
-            alt="Experience Improvement Partners"
-            width={148}
-            height={102}
-            priority
-            className="h-11 w-auto"
+          {/* SVG mark. next/image does not optimize SVG, so this stays a plain image. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={proposedLogo.onDark}
+            alt="EIP"
+            width={48}
+            height={48}
+            className="h-11 w-11"
           />
         </Link>
 

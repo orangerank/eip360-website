@@ -10,6 +10,18 @@
  * - Primary button: "Book a 20-minute call".
  */
 
+/**
+ * Proposed logo Chris chose. Not final until EIP signs off.
+ * Light gold is for paper backgrounds. The on-dark file is for the header and other dark surfaces.
+ */
+export const proposedLogo = {
+  status: "proposed" as const,
+  note: "Chris chose this mark. It still needs EIP sign-off and is not the final logo.",
+  light: "/brand/eip-logo.svg",
+  onDark: "/brand/eip-logo-on-dark.svg",
+  mark: "/brand/eip-logo-mark.svg",
+} as const;
+
 export const company = {
   name: "Experience Improvement Partners",
   short: "EIP",

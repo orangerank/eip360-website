@@ -150,6 +150,7 @@ All of these live in `content/site.ts` unless noted.
 13. Snapshot page still includes the current line "with no invoice". Confirm the wording. The file upload to the production intake worker is not wired on this review build.
 14. Analytics events are not installed. Add them when access is available: calculator completed, result call clicked, checkup completed, call button clicked, `/thanks` viewed.
 15. No email tool yet. The message form uses a mailto link. A PDF of the Turn Tax breakdown is not gated.
+16. Logo in `public/brand/` is proposed. Chris chose it. EIP has not signed off, so it is not final. `proposedLogo.status` in `content/site.ts` is `"proposed"`.
 
 The review banner at the top of every page is `siteMeta.reviewBanner` in `content/site.ts`. Turn it off at launch, and set the production build variable `NEXT_PUBLIC_INDEXABLE` to `true`.
 

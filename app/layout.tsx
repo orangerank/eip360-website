@@ -41,7 +41,6 @@ export const metadata: Metadata = {
   robots: siteMeta.indexable
     ? { index: true, follow: true }
     : { index: false, follow: false },
-  icons: { icon: "/assets/brand/eip-logo-640.webp" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
