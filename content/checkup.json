@@ -1,0 +1,184 @@
+[
+  {
+    "key": "numbers",
+    "title": "Know your numbers",
+    "note": "You cannot fix what you cannot see.",
+    "questions": [
+      {
+        "id": "n1",
+        "q": "Do you know your voluntary turnover for the last 12 months, by role?",
+        "action": "Pull 12 months of departures by role, so you know where turnover lives.",
+        "tool": "Retention Dashboard",
+        "weight": 3
+      },
+      {
+        "id": "n2",
+        "q": "Can you see turnover by manager, not just company-wide?",
+        "action": "Break turnover out by manager. In most companies a few teams account for most of the people who leave.",
+        "tool": "Flight Risk Score™",
+        "weight": 5
+      },
+      {
+        "id": "n3",
+        "q": "Do you know what one departure really costs you, beyond recruiting fees?",
+        "action": "Price one departure across all 13 cost categories, not just job ads and agency fees.",
+        "tool": "Turn Tax™",
+        "weight": 5
+      },
+      {
+        "id": "n4",
+        "q": "Do you track how many new hires leave in their first 90 days?",
+        "action": "Track first-90-day turnover on its own. It is usually the fastest number to move.",
+        "tool": "Retention Dashboard",
+        "weight": 4
+      },
+      {
+        "id": "n5",
+        "q": "Do you know which of your high performers are most likely to leave next?",
+        "action": "Score everyone for the next 90 days, so you know who needs a conversation before they resign.",
+        "tool": "Flight Risk Score™",
+        "weight": 5
+      },
+      {
+        "id": "n6",
+        "q": "Do your leaders review retention numbers at least once a month?",
+        "action": "Put a short set of retention numbers in front of your leaders every month, with an owner for each.",
+        "tool": "Retention Dashboard",
+        "weight": 3
+      }
+    ]
+  },
+  {
+    "key": "managers",
+    "title": "Your managers",
+    "note": "People leave managers more than they leave companies.",
+    "questions": [
+      {
+        "id": "m1",
+        "q": "Do managers have a regular one-on-one with every direct report?",
+        "action": "Set a standing one-on-one for every direct report, even 15 minutes every other week.",
+        "weight": 3
+      },
+      {
+        "id": "m2",
+        "q": "Do managers hold Retention Talks with their best people before anyone resigns?",
+        "action": "Start Retention Talks with your highest performers this month: what keeps them, and what would make them leave.",
+        "weight": 5
+      },
+      {
+        "id": "m3",
+        "q": "Are managers measured on the turnover of their own teams?",
+        "action": "Add 12-month team turnover to every manager's scorecard.",
+        "weight": 4
+      },
+      {
+        "id": "m4",
+        "q": "Are new supervisors trained to coach, not just schedule and assign?",
+        "action": "Train new supervisors to coach in their first 90 days in the role.",
+        "weight": 3
+      },
+      {
+        "id": "m5",
+        "q": "When someone resigns, does their manager's manager find out why?",
+        "action": "Have the skip-level manager talk to everyone who resigns, within a week.",
+        "weight": 2
+      },
+      {
+        "id": "m6",
+        "q": "Do you act on what people who left told you, within 90 days?",
+        "action": "Pick the top reason people gave for leaving and fix one part of it within 90 days.",
+        "weight": 3
+      }
+    ]
+  },
+  {
+    "key": "hiring",
+    "title": "Hiring and the first 90 days",
+    "note": "Many departures are decided at the door.",
+    "questions": [
+      {
+        "id": "h1",
+        "q": "Do you know what your longest-tenured top performers have in common?",
+        "action": "Find the traits your best long-tenured people share. That is your profile of who stays.",
+        "tool": "Hire Smart™",
+        "weight": 4
+      },
+      {
+        "id": "h2",
+        "q": "Do you hire against that profile, not just a job description?",
+        "action": "Rewrite postings and interview questions around the profile of who stays and performs.",
+        "tool": "Hire Smart™",
+        "weight": 4
+      },
+      {
+        "id": "h3",
+        "q": "Can you make an offer within 7 days of a strong interview?",
+        "action": "Cut your time to an offer to under 7 days. Good candidates take the first solid offer.",
+        "weight": 3
+      },
+      {
+        "id": "h4",
+        "q": "Does every new hire have a named mentor for their first 90 days?",
+        "action": "Give every new hire a mentor from your best long-tenured people.",
+        "weight": 3
+      },
+      {
+        "id": "h5",
+        "q": "Do new hires get a check-in at 30, 60 and 90 days?",
+        "action": "Schedule 30, 60 and 90-day check-ins for every new hire before their first day.",
+        "weight": 3
+      },
+      {
+        "id": "h6",
+        "q": "Do you know which employers are hiring your people away, and what they offer?",
+        "action": "Find out who is hiring your people, what they offer, and where you already win.",
+        "tool": "Competitor Intel",
+        "weight": 3
+      }
+    ]
+  },
+  {
+    "key": "friction",
+    "title": "Friction, pay and growth",
+    "note": "The everyday reasons people start looking.",
+    "questions": [
+      {
+        "id": "f1",
+        "q": "Are schedules posted at least two weeks ahead, and kept?",
+        "action": "Post schedules two weeks ahead and hold them. Late changes push people out.",
+        "weight": 3
+      },
+      {
+        "id": "f2",
+        "q": "Have you checked frontline pay against your local market in the last 12 months?",
+        "action": "Check frontline pay against the employers you compete with for people, role by role.",
+        "weight": 3
+      },
+      {
+        "id": "f3",
+        "q": "Can people see a career path from their role to the next one, with timing?",
+        "action": "Publish a career path for your largest frontline role, with what it takes and when.",
+        "weight": 4
+      },
+      {
+        "id": "f4",
+        "q": "Do you ask employees which fixes they want, and tell them what you did?",
+        "action": "Ask your people which fixes matter most, then close the loop and tell them what changed.",
+        "tool": "Honest Read™",
+        "weight": 4
+      },
+      {
+        "id": "f5",
+        "q": "Are overtime and the hardest shifts shared fairly?",
+        "action": "Share overtime and hard shifts by rotation, and cap mandatory overtime.",
+        "weight": 2
+      },
+      {
+        "id": "f6",
+        "q": "Do the tools and systems people use every day work most of the time?",
+        "action": "Ask the front line which tool slows them down most, and fix that one first.",
+        "weight": 2
+      }
+    ]
+  }
+]

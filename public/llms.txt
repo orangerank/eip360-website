@@ -1,0 +1,54 @@
+Experience Improvement Partners (EIP)
+https://eip360.com
+
+EIP is a workforce retention advisory firm in Dallas, Texas. Advisory first. Technology backed.
+Founder and CEO: Brett Kiley. Chief Growth Officer: Tony Fox.
+Email: hello@eip360.com
+Book a 20-minute call: https://calendly.com/useeip-45
+LinkedIn: https://www.linkedin.com/company/113434525
+
+What EIP does
+EIP shows who needs a conversation in the next 90 days, prices what turnover costs, finds the causes in a company's own data, and stays until the number moves.
+
+Pages
+Home: /
+Approach: /approach
+Results: /results
+Industries: /industries
+Team: /team
+Insights: /insights
+Book a call: /contact#book
+Turn Tax calculator: /turn-tax-calculator
+Retention Checkup: /retention-checkup
+The book: /white-papers
+Playbooks: /industry-playbooks
+Articles: /articles
+Media: /media
+Data security: /security
+How EIP compares: /compare
+Retention Snapshot, by invitation: /free-poc
+Demo, password after booking: /demo
+For AI: /for-ai
+
+Tools
+Flight Risk Score: /tools/flight-risk-score
+Turn Tax: /tools/turn-tax
+Honest Read: /tools/honest-read
+Hire Smart: /tools/hire-smart
+Retention Dashboard: /tools/retention-dashboard
+Competitor Intel: /tools/competitor-intel
+
+Engagement
+Book a 20-minute call. No contract. No cost for the call.
+If it is a fit, a Retention Snapshot may follow: one file, seven standard data fields, names coded before anyone looks, first numbers in about 7 days.
+Then a 30-day diagnostic, a 90-day quick start, and a monthly review.
+
+Founder results
+Results from our founder's work at a Fortune 10 company, not EIP client results. Those were that company's results, not a forecast. The company is not named.
+
+Data
+No system access. Names become codes before analysis. Encrypted in transit and at rest. Kept for the engagement plus 90 days, then deleted. SOC 2 Type I in progress, target Q1 2027. Healthcare work uses a Business Associate Agreement.
+Flight Risk Score and Turn Tax are documented weighted calculations. They are not machine learning. They do not make employment decisions.
+
+Book
+The Retention Advantage, by Brett Kiley. Chapters are readable on the site. Print edition expected Summer 2027.
