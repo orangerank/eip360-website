@@ -42,6 +42,21 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  const host = new URL(request.url).host;
+  try {
+    return await handlePost(request, host);
+  } catch (error) {
+    const name = error instanceof Error ? error.name : "Error";
+    const message = error instanceof Error ? error.message.slice(0, 200) : "failed";
+    console.log(JSON.stringify({ result: "handler_error", name }));
+    if (isPreviewHost(host)) {
+      return Response.json({ ok: false, error: "Something went wrong. Please try again.", detail: `${name}: ${message}` }, { status: 500 });
+    }
+    return genericError(500);
+  }
+}
+
+async function handlePost(request: Request, host: string) {
   let body: Record<string, unknown>;
   try {
     body = (await request.json()) as Record<string, unknown>;
@@ -60,7 +75,6 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, error: "Check the form and try again.", fields: validated.errors }, { status: 400 });
   }
 
-  const host = new URL(request.url).host;
   const env = await readEnv();
   const keys = turnstileKeys(env, host);
   const token = typeof body.turnstileToken === "string" ? body.turnstileToken : "";
