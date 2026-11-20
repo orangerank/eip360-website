@@ -48,10 +48,7 @@ export async function POST(request: Request) {
   } catch (error) {
     const name = error instanceof Error ? error.name : "Error";
     const message = error instanceof Error ? error.message.slice(0, 200) : "failed";
-    console.log(JSON.stringify({ result: "handler_error", name }));
-    if (isPreviewHost(host)) {
-      return Response.json({ ok: false, error: "Something went wrong. Please try again.", detail: `${name}: ${message}` }, { status: 500 });
-    }
+    console.log(JSON.stringify({ result: "handler_error", name, message }));
     return genericError(500);
   }
 }
