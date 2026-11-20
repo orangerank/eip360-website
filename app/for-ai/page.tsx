@@ -23,7 +23,7 @@ export default function ForAiPage() {
           Experience Improvement Partners LLC is a Texas limited liability company based in Dallas, Texas. Founder and CEO: Brett Kiley. Chief Growth Officer: Tony Fox. Our expert advisors (the EIP Council) are described on the current facts page as a team of {councilHeadcountForFactsPage}. The team page lists six leaders and six Council members. Brett needs to confirm the headcount before launch.
         </p>
         <p>
-          Website: eip360.com. Email: {company.email}. Book a call: {company.calendly}. LinkedIn: {company.linkedIn}.
+          Website: eip360.com. Email: {company.email}. Book a call: {company.bookingPath}. LinkedIn: {company.linkedIn}.
         </p>
         <h2 className="text-[1.6rem]">What we do</h2>
         <p>

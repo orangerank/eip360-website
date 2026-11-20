@@ -98,7 +98,20 @@ Preview secrets are configured with the preview, not by the production secret li
 
 This Worker does not need a KV namespace, an R2 bucket, or an Images binding. The free Workers plan is enough.
 
-The contact form opens the visitor's email app to `hello@eip360.com`. An email provider is not connected. Calendly stays embedded on `/contact#book` (`https://calendly.com/useeip-45`). In Calendly, set the after-booking redirect to this site's `/thanks` when you are ready. The confirmation email, including the demo password, is sent by Calendly, not by this repo.
+The booking button goes to `/contact#book`, which is a form (name, company, email, phone), not Calendly. A separate “Or write to us” note still opens the visitor's email app to `hello@eip360.com`.
+
+### Booking form environment
+
+All of these are Worker secrets or runtime variables. Do not put them in git. Preview (a `*.workers.dev` host, including localhost) uses Cloudflare's documented Turnstile test keys when the real keys are unset. Any other host refuses the form until the real keys are set.
+
+| Name | Required | Purpose |
+| --- | --- | --- |
+| `TURNSTILE_SITE_KEY` | Production yes. Preview no. | Turnstile widget. Public. |
+| `TURNSTILE_SECRET_KEY` | Production yes. Preview no. | Turnstile siteverify. Secret. |
+| `WEBHOOK_URL` | No | Signed POST target. If unset, the Worker stores the submission and logs `webhook not configured`. The visitor still sees the confirmation. |
+| `WEBHOOK_SECRET` | When `WEBHOOK_URL` is set | HMAC-SHA256 key. Signature header is `X-EIP-Signature: sha256=<hex>` over `<unix timestamp>.<raw JSON body>`. `X-EIP-Timestamp` carries the timestamp. |
+
+Submissions are stored in the `BOOKING` Durable Object (`BookingStore` in `wrangler.jsonc`). The same email inside 24 hours is stored as a duplicate and is not posted again. That window is a proposed default. The webhook JSON uses `client_id` `EIP` and the schema in the booking form spec v0.1. The consent sentence is proposed and lives in `lib/booking.ts`.
 
 ## Redirects
 

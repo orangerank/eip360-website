@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "You're booked",
+  title: "Request received",
   robots: { index: false, follow: false },
 };
 
@@ -15,9 +15,9 @@ const cards = [
 export default function ThanksPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 lg:px-6 lg:py-24">
-      <h1 className="text-[clamp(2.2rem,5vw,3.8rem)]">You&apos;re booked. Here is what to expect.</h1>
+      <h1 className="text-[clamp(2.2rem,5vw,3.8rem)]">Thanks. We&apos;ll email you times to talk with Tony shortly.</h1>
       <p className="mt-5 max-w-2xl text-[1.08rem] text-ink/80">
-        A calendar invitation is on its way to your inbox. On the call we will talk about where turnover is hurting you, how we would price it, and whether a Retention Snapshot makes sense. Nothing to prepare, but a rough sense of turnover by role helps.
+        Sending the form does not book the meeting. Tony Fox will email a few times. Nothing to prepare, but a rough sense of turnover by role helps.
       </p>
       <h2 className="mt-12 text-[2rem]">Three things worth a look before we talk</h2>
       <div className="mt-6 grid gap-4 md:grid-cols-3">

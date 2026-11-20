@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "eip360-website",
-  "main": ".open-next/worker.js",
+  "main": "cloudflare/worker.ts",
   "compatibility_date": "2026-11-18",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
@@ -16,5 +16,9 @@
   ],
   "observability": {
     "enabled": true
-  }
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "BOOKING", "class_name": "BookingStore" }]
+  },
+  "migrations": [{ "tag": "v1-booking-store", "new_sqlite_classes": ["BookingStore"] }]
 }

@@ -29,7 +29,7 @@ export const company = {
   email: "hello@eip360.com",
   office: "EIP Office, Dallas, Texas",
   linkedIn: "https://www.linkedin.com/company/113434525",
-  calendly: "https://calendly.com/useeip-45",
+  bookingPath: "/contact#book",
   tagline: "Advisory first. Technology backed.",
 } as const;
 
