@@ -6,7 +6,7 @@ export const BOOKING_PAGE = "/contact#book";
 
 /** Proposed consent sentence. Exact text is stored on each submission. */
 export const BOOKING_CONSENT_TEXT =
-  "I agree that EIP may email me a few times to schedule a 20-minute call. Submitting this form does not book a meeting.";
+  "I agree that EIP may email me to schedule a 20-minute call.";
 
 /** Proposed duplicate window. Spec leaves the length open; 24 hours is the default until Tony or Brett decide. */
 export const DUPLICATE_WINDOW_MS = 24 * 60 * 60 * 1000;

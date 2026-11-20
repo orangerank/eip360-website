@@ -137,7 +137,6 @@ export function BookingForm() {
       <div role="status" className="border border-gold/50 bg-white p-6 sm:p-8">
         <h2 className="text-[1.6rem]">Request received</h2>
         <p className="mt-3 text-ink/80">{done}</p>
-        <p className="mt-3 text-[0.95rem] text-ink/65">This does not book the meeting. Tony will email a few times.</p>
       </div>
     );
   }
