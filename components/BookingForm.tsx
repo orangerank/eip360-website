@@ -1,9 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { BOOKING_CONSENT_TEXT, CONFIRMATION_MESSAGE } from "@/lib/booking";
+import { useEffect, useMemo, useState } from "react";
+import {
+  AVAILABILITY_BLOCKS,
+  AVAILABILITY_DAYS,
+  BOOKING_CONSENT_TEXT,
+  CENTRAL_TIME_ZONE,
+  CONFIRMATION_MESSAGE,
+  localWindowLabel,
+} from "@/lib/booking";
 
-type FieldErrors = Partial<Record<"name" | "company" | "email" | "phone" | "consent", string>>;
+type FieldErrors = Partial<Record<"name" | "company" | "email" | "phone" | "consent" | "availability", string>>;
+
+const BLOCK_CT_LABEL = {
+  morning: "9:00 AM–12:00 PM CT",
+  afternoon: "1:00–5:00 PM CT",
+} as const;
 
 declare global {
   interface Window {
@@ -20,6 +32,23 @@ export function BookingForm() {
   const [formError, setFormError] = useState("");
   const [pending, setPending] = useState(false);
   const [done, setDone] = useState("");
+  const [selected, setSelected] = useState<string[]>([]);
+  const [timeZone, setTimeZone] = useState(CENTRAL_TIME_ZONE);
+
+  useEffect(() => {
+    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (zone) setTimeZone(zone);
+  }, []);
+
+  const localLabels = useMemo(() => {
+    const labels = new Map<string, string | null>();
+    for (const day of AVAILABILITY_DAYS) {
+      for (const block of AVAILABILITY_BLOCKS) {
+        labels.set(`${day.id}:${block.id}`, localWindowLabel(day.id, block.id, timeZone));
+      }
+    }
+    return labels;
+  }, [timeZone]);
 
   useEffect(() => {
     let cancelled = false;
@@ -63,6 +92,11 @@ export function BookingForm() {
       email: String(data.get("email") || ""),
       phone: String(data.get("phone") || ""),
       consent: data.get("consent") === "yes",
+      availability: selected.map((key) => {
+        const [day, block] = key.split(":");
+        return { day, block };
+      }),
+      visitorTimezone: timeZone,
       turnstileToken: token,
       referrer: document.referrer,
     };
@@ -72,6 +106,7 @@ export function BookingForm() {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email.trim())) next.email = "Enter a work email.";
     if (payload.phone.replace(/\D/g, "").length < 7) next.phone = "Enter a phone number.";
     if (!payload.consent) next.consent = "Consent is required.";
+    if (selected.length === 0) next.availability = "Choose at least one time.";
     if (Object.keys(next).length) {
       setErrors(next);
       return;
@@ -113,6 +148,15 @@ export function BookingForm() {
       <Field label="Company" name="company" autoComplete="organization" error={errors.company} />
       <Field label="Work email" name="email" type="email" autoComplete="email" error={errors.email} />
       <Field label="Phone" name="phone" type="tel" autoComplete="tel" error={errors.phone} />
+      <AvailabilityPicker
+        selected={selected}
+        timeZone={timeZone}
+        localLabels={localLabels}
+        error={errors.availability}
+        onToggle={(key) =>
+          setSelected((current) => (current.includes(key) ? current.filter((item) => item !== key) : [...current, key]))
+        }
+      />
       <label className="flex items-start gap-3 text-[0.95rem]">
         <input name="consent" value="yes" type="checkbox" className="mt-1 size-5" />
         <span>{BOOKING_CONSENT_TEXT}</span>
@@ -132,6 +176,73 @@ export function BookingForm() {
         {pending ? "Sending" : "Request a 20-minute call"}
       </button>
     </form>
+  );
+}
+
+function AvailabilityPicker({
+  selected,
+  timeZone,
+  localLabels,
+  error,
+  onToggle,
+}: {
+  selected: string[];
+  timeZone: string;
+  localLabels: Map<string, string | null>;
+  error?: string;
+  onToggle: (key: string) => void;
+}) {
+  const differs = timeZone !== CENTRAL_TIME_ZONE;
+  return (
+    <fieldset
+      aria-invalid={Boolean(error)}
+      aria-describedby={error ? "availability-error" : "availability-hint"}
+      className="grid gap-3"
+    >
+      <legend className="text-[0.95rem] font-semibold">When can you talk?</legend>
+      <p id="availability-hint" className="text-[0.9rem] font-normal text-ink/70">
+        Weekdays, Central time. Choose at least one. Morning is 9:00 AM–12:00 PM CT. Afternoon is 1:00–5:00 PM CT.
+        {differs ? ` Your time zone is ${timeZone}.` : ""}
+      </p>
+      <div className="grid gap-3">
+        {AVAILABILITY_DAYS.map((day) => (
+          <div key={day.id} className="grid gap-2 sm:grid-cols-[6.5rem_1fr_1fr] sm:items-stretch">
+            <div className="pt-1 text-[0.95rem] font-semibold sm:pt-3">{day.label}</div>
+            {AVAILABILITY_BLOCKS.map((block) => {
+              const key = `${day.id}:${block.id}`;
+              const local = localLabels.get(key);
+              const inputId = `availability-${key}`;
+              return (
+                <label key={key} htmlFor={inputId} className="flex min-h-11 cursor-pointer items-start gap-3 border border-ink/15 bg-paper px-3 py-2">
+                  <input
+                    id={inputId}
+                    type="checkbox"
+                    className="mt-1 size-5 shrink-0"
+                    checked={selected.includes(key)}
+                    onChange={() => onToggle(key)}
+                    aria-describedby={local ? `${inputId}-local` : undefined}
+                  />
+                  <span>
+                    <span className="block text-[0.95rem] font-semibold">{block.label}</span>
+                    <span className="block text-[0.85rem] font-normal text-ink/70">{BLOCK_CT_LABEL[block.id]}</span>
+                    {local ? (
+                      <span id={`${inputId}-local`} className="block text-[0.85rem] font-normal text-ink/60">
+                        {local} your time
+                      </span>
+                    ) : null}
+                  </span>
+                </label>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+      {error ? (
+        <p id="availability-error" role="alert" className="text-[0.95rem] font-normal text-[#8d1d32]">
+          {error}
+        </p>
+      ) : null}
+    </fieldset>
   );
 }
 

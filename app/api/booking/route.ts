@@ -67,6 +67,8 @@ async function handlePost(request: Request, host: string) {
     email: body.email,
     phone: body.phone,
     consent: body.consent === true,
+    availability: body.availability,
+    visitorTimezone: body.visitorTimezone,
   });
   if (!validated.ok) {
     return Response.json({ ok: false, error: "Check the form and try again.", fields: validated.errors }, { status: 400 });
@@ -117,6 +119,8 @@ async function handlePost(request: Request, host: string) {
     submittedAt,
     checkedAt,
     fields: validated.fields,
+    availability: validated.availability,
+    visitorTimezone: validated.visitorTimezone,
     site,
     referrer,
   });

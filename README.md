@@ -98,7 +98,9 @@ Preview secrets are configured with the preview, not by the production secret li
 
 This Worker does not need a KV namespace, an R2 bucket, or an Images binding. The free Workers plan is enough.
 
-The booking button goes to `/contact#book`, which is a form (name, company, email, phone), not Calendly. A separate “Or write to us” note still opens the visitor's email app to `hello@eip360.com`.
+The booking button goes to `/contact#book`, which is a form (name, company, email, phone, and at least one weekday window), not Calendly. A separate “Or write to us” note still opens the visitor's email app to `hello@eip360.com`.
+
+The webhook JSON adds `availability` and `visitor_timezone` to the v0.1 schema. Each window is `{ "day": "tue", "block": "morning", "start_ct": "09:00", "end_ct": "12:00" }`. Days are `mon` through `fri`. Morning is 9:00 AM–12:00 PM Central (`09:00`–`12:00`). Afternoon is 1:00–5:00 PM Central (`13:00`–`17:00`). `visitor_timezone` is the IANA zone from the browser, such as `America/Chicago`. The server checks that at least one known window is present and that the time zone is real. The confirmation still does not say the meeting is booked.
 
 ### Booking form environment
 
