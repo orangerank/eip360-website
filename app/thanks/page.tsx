@@ -15,7 +15,7 @@ const cards = [
 export default function ThanksPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 lg:px-6 lg:py-24">
-      <h1 className="text-[clamp(2.2rem,5vw,3.8rem)]">Thanks. We&apos;ll email you times to talk with Tony shortly.</h1>
+      <h1 className="text-[clamp(2.2rem,5vw,3.8rem)]">Thanks. You&apos;ll receive a confirmation email with your meeting time and a calendar invite shortly.</h1>
       <p className="mt-5 max-w-2xl text-[1.08rem] text-ink/80">
         Nothing to prepare, but a rough sense of turnover by role helps.
       </p>

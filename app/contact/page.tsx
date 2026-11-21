@@ -6,7 +6,7 @@ import { callHost, heroMicro } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Book a 20-minute call",
-  description: "Request a 20-minute call with EIP.",
+  description: "Pick the days and times that work for you. We'll book a 20-minute call with Tony at an open time in that window.",
 };
 
 export default function ContactPage() {
@@ -14,7 +14,7 @@ export default function ContactPage() {
     <div className="mx-auto max-w-6xl px-4 py-14 lg:px-6 lg:py-20">
       <h1 className="text-[clamp(2.3rem,5vw,4rem)]">Book a 20-minute call.</h1>
       <p className="mt-4 max-w-2xl text-[1.12rem] text-ink/80">
-        Tell us how to reach you to talk with {callHost.name}, our {callHost.title}.
+        Pick the days and times that work for you. We&apos;ll book a 20-minute call with {callHost.name}, our {callHost.title}, at an open time in that window.
       </p>
       <p className="mt-3 text-ink/70">{heroMicro}</p>
 

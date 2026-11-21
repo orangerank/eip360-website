@@ -6,7 +6,7 @@ export const BOOKING_PAGE = "/contact#book";
 
 /** Proposed consent sentence. Exact text is stored on each submission. */
 export const BOOKING_CONSENT_TEXT =
-  "I agree that EIP may email me to schedule a 20-minute call.";
+  "I agree that EIP may email me to confirm and schedule a 20-minute call.";
 
 /** Proposed duplicate window. Spec leaves the length open; 24 hours is the default until Tony or Brett decide. */
 export const DUPLICATE_WINDOW_MS = 24 * 60 * 60 * 1000;
@@ -20,7 +20,7 @@ export const TURNSTILE_TEST_SITE_KEY = "1x00000000000000000000AA";
 export const TURNSTILE_TEST_SECRET_KEY = "1x0000000000000000000000000000000AA";
 
 export const CONFIRMATION_MESSAGE =
-  "Thanks. We'll email you times to talk with Tony shortly.";
+  "Thanks. You'll receive a confirmation email with your meeting time and a calendar invite shortly.";
 
 export const CENTRAL_TIME_ZONE = "America/Chicago";
 

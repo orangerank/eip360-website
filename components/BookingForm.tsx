@@ -200,7 +200,7 @@ function AvailabilityPicker({
     >
       <legend className="text-[0.95rem] font-semibold">When can you talk?</legend>
       <p id="availability-hint" className="text-[0.9rem] font-normal text-ink/70">
-        Weekdays, Central time. Choose at least one. Morning is 9:00 AM–12:00 PM CT. Afternoon is 1:00–5:00 PM CT.
+        Pick the weekdays and times that work for you. We&apos;ll book a 20-minute call with Tony at an open time in that window. Choose at least one. Morning is 9:00 AM–12:00 PM CT. Afternoon is 1:00–5:00 PM CT.
         {differs ? ` Your time zone is ${timeZone}.` : ""}
       </p>
       <div className="grid gap-3">
