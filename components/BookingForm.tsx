@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   AVAILABILITY_BLOCKS,
   AVAILABILITY_DAYS,
   BOOKING_CONSENT_TEXT,
   CENTRAL_TIME_ZONE,
-  CONFIRMATION_MESSAGE,
   localWindowLabel,
 } from "@/lib/booking";
 
@@ -26,12 +26,12 @@ declare global {
 }
 
 export function BookingForm() {
+  const router = useRouter();
   const [siteKey, setSiteKey] = useState<string | null>(null);
   const [token, setToken] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState("");
   const [pending, setPending] = useState(false);
-  const [done, setDone] = useState("");
   const [selected, setSelected] = useState<string[]>([]);
   const [timeZone, setTimeZone] = useState(CENTRAL_TIME_ZONE);
 
@@ -122,23 +122,14 @@ export function BookingForm() {
       if (!response.ok || !result.ok) {
         setErrors(result.fields ?? {});
         setFormError(result.error || "Something went wrong. Please try again.");
+        setPending(false);
         return;
       }
-      setDone(result.message || CONFIRMATION_MESSAGE);
+      router.push("/thanks");
     } catch {
       setFormError("Something went wrong. Please try again.");
-    } finally {
       setPending(false);
     }
-  }
-
-  if (done) {
-    return (
-      <div role="status" className="border border-gold/50 bg-white p-6 sm:p-8">
-        <h2 className="text-[1.6rem]">Request received</h2>
-        <p className="mt-3 text-ink/80">{done}</p>
-      </div>
-    );
   }
 
   return (

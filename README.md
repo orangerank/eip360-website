@@ -100,7 +100,13 @@ This Worker does not need a KV namespace, an R2 bucket, or an Images binding. Th
 
 The booking button goes to `/contact#book`, which is a form (name, company, email, phone, and at least one weekday window), not Calendly. A separate “Or write to us” note still opens the visitor's email app to `hello@eip360.com`.
 
-The webhook JSON adds `availability` and `visitor_timezone` to the v0.1 schema. Each window is `{ "day": "tue", "block": "morning", "start_ct": "09:00", "end_ct": "12:00" }`. Days are `mon` through `fri`. Morning is 9:00 AM–12:00 PM Central (`09:00`–`12:00`). Afternoon is 1:00–5:00 PM Central (`13:00`–`17:00`). `visitor_timezone` is the IANA zone from the browser, such as `America/Chicago`. The server checks that at least one known window is present and that the time zone is real. The confirmation still does not say the meeting is booked.
+The webhook JSON adds `availability` and `visitor_timezone` to the v0.1 schema. Each window is `{ "day": "tue", "block": "morning", "start_ct": "09:00", "end_ct": "12:00" }`. Days are `mon` through `fri`. Morning is 9:00 AM–12:00 PM Central (`09:00`–`12:00`). Afternoon is 1:00–5:00 PM Central (`13:00`–`17:00`). `visitor_timezone` is the IANA zone from the browser, such as `America/Chicago`. The server checks that at least one known window is present and that the time zone is real. After a successful submit the visitor goes to `/thanks`. The confirmation says they will receive an email with the meeting time and a calendar invite. This Worker does not read a calendar.
+
+### Next phase: specific times from Tony's calendar
+
+Not built. There is no calendar connection in this repo. The current form still collects weekday morning and afternoon windows.
+
+When this is built, the booking page asks the Worker for Tony Fox's open times. The Worker reads his Outlook calendar through Microsoft Graph, caches that answer for one to two minutes, and returns only a short list: about two or three days in a week, and two or three times on a day, so the page does not look like a sales-development booking grid. At the moment of booking the Worker checks that slot again, and refuses it if it is no longer free, so two visitors cannot take the same time.
 
 ### Booking form environment
 

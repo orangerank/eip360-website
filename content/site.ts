@@ -86,6 +86,12 @@ export const callHost = {
   title: "Chief Growth Officer",
 } as const;
 
+/**
+ * Welcome video on /thanks. Set a YouTube or Vimeo URL, or a file in public/
+ * such as /media/tony-welcome.mp4. Leave empty to show the placeholder.
+ */
+export const tonyWelcomeVideo = "";
+
 export const cta = {
   eyebrow: "Start with a conversation",
   headline: "Start with a 20-minute call.",

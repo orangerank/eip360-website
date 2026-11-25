@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { BookingForm } from "@/components/BookingForm";
 import { ContactForm } from "@/components/ContactForm";
 import { callHost, heroMicro } from "@/content/site";
@@ -26,9 +25,6 @@ export default function ContactPage() {
             <li>How we would put a dollar figure on it</li>
             <li>Whether a Retention Snapshot makes sense as a next step</li>
           </ul>
-          <p className="mt-8 text-[0.95rem] text-ink/70">
-            Your data stays protected: names coded before anyone looks, SOC 2 Type I in progress (target Q1 2027), and a BAA for healthcare. <Link className="underline underline-offset-4" href="/security">Data security</Link>.
-          </p>
         </section>
         <section id="book" className="scroll-mt-28">
           <BookingForm />
