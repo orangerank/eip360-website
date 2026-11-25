@@ -104,7 +104,7 @@ The webhook JSON adds `availability` and `visitor_timezone` to the v0.1 schema. 
 
 ### Next phase: specific times from Tony's calendar
 
-Not built. There is no calendar connection in this repo. The current form still collects weekday morning and afternoon windows.
+Not built. There is no calendar connection in this repo. The current form at `/contact#book` still collects weekday morning and afternoon windows. An unlisted mockup of the later slot list is at `/contact-mockup`. It uses hardcoded example times, is not in the navigation, and does not submit or store anything.
 
 When this is built, the booking page asks the Worker for Tony Fox's open times. The Worker reads his Outlook calendar through Microsoft Graph, caches that answer for one to two minutes, and returns only a short list: about two or three days in a week, and two or three times on a day, so the page does not look like a sales-development booking grid. At the moment of booking the Worker checks that slot again, and refuses it if it is no longer free, so two visitors cannot take the same time.
 
